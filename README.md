@@ -8,8 +8,6 @@
 composer require ahmetbedir/nova-translatable-slug
 ```
 
-</br>
-
 # Usage
 ```php
 TranslatableSlug::make('Slug')

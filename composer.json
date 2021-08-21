@@ -1,0 +1,32 @@
+{
+    "name": "ahmetbedir/nova-translatable-slug",
+    "description": "A Laravel Nova field.",
+    "keywords": [
+        "laravel",
+        "nova",
+        "translatable",
+        "slug"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/nova": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ahmetbedir\\NovaTranslatableSlug\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ahmetbedir\\NovaTranslatableSlug\\FieldServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -3,6 +3,11 @@
 </br>
 </br>
 
+# Install
+```sh
+    composer require ahmetbedir/nova-translatable-slug
+```
+
 # Usage
 ```php
     TranslatableSlug::make('Slug')

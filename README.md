@@ -5,14 +5,14 @@
 
 # Install
 ```sh
-    composer require ahmetbedir/nova-translatable-slug
+composer require ahmetbedir/nova-translatable-slug
 ```
 
 # Usage
 ```php
-    TranslatableSlug::make('Slug')
-        ->from('title')
-        ->translatable()
+TranslatableSlug::make('Slug')
+    ->from('title')
+    ->translatable()
 ```
 </br>
 

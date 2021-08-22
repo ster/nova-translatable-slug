@@ -2,6 +2,7 @@
 namespace Ahmetbedir\NovaTranslatableSlug\Traits;
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 trait HasTranslatableSlug
 {
@@ -72,5 +73,35 @@ trait HasTranslatableSlug
                 $query->where('id', '<>', $updateId);
             })
             ->exists();
+    }
+
+    /**
+     * @param $query
+     * @param $slug
+     * @param $locale
+     */
+    public function scopeWhereTranslatableSlug(Builder $query, string $slug, ?string $locale = null): Builder
+    {
+        $locale = $locale ?: app()->getLocale();
+
+        return $query->whereRaw("JSON_EXTRACT(slug, '$." . $locale . "') = '{$slug}'");
+    }
+
+    /**
+     * @param string $slug
+     * @param array $columns
+     */
+    public static function findBySlug(string $slug, ?string $locale = null, array $columns = ['*'])
+    {
+        return static::whereTranslatableSlug($slug, $locale)->first($columns);
+    }
+
+    /**
+     * @param string $slug
+     * @param array $columns
+     */
+    public static function findBySlugOrFail(string $slug, ?string $locale = null, array $columns = ['*'])
+    {
+        return static::whereTranslatableSlug($slug, $locale)->firstOrFail($columns);
     }
 }

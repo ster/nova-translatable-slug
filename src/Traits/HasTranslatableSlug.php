@@ -1,5 +1,5 @@
 <?php
-namespace Ahmetbedir\NovaTranslatableSlug;
+namespace Ahmetbedir\NovaTranslatableSlug\Traits;
 
 use Illuminate\Support\Str;
 

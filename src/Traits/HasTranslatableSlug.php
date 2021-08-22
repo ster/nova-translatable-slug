@@ -19,13 +19,13 @@ trait HasTranslatableSlug
 
         self::creating(function ($model) use ($translatableLocales) {
             foreach ($translatableLocales as $locale) {
-                $model->slug = static::getUniqueSlug($model->slug, null, $locale);
+                $model->slug = static::getUniqueSlug($model->slug, $locale);
             }
         });
 
         self::updating(function ($model) use ($translatableLocales) {
             foreach ($translatableLocales as $locale) {
-                $model->slug = static::getUniqueSlug($model->slug, $model->id, $locale);
+                $model->slug = static::getUniqueSlug($model->slug, $locale, $model->id);
             }
         });
     }
@@ -35,12 +35,12 @@ trait HasTranslatableSlug
      * @param $updateId
      * @return mixed
      */
-    private static function getUniqueSlug($value, $updateId = null, $locale)
+    private static function getUniqueSlug($value, $locale, $updateId = null)
     {
         $slug = Str::slug($value);
 
         if (static::whereRaw("JSON_EXTRACT(slug, '$." . $locale . "') = '{$slug}'")->exists()) {
-            $slug = static::makeUniqueSlug($slug, $updateId, $locale);
+            $slug = static::makeUniqueSlug($slug, $locale, $updateId);
         }
 
         return $slug;
@@ -50,12 +50,12 @@ trait HasTranslatableSlug
      * @param $slug
      * @param $updateId
      */
-    private static function makeUniqueSlug($slug, $updateId = null, $locale)
+    private static function makeUniqueSlug($slug, $locale, $updateId = null)
     {
         $originalSlug = $slug;
         $count = 2;
 
-        while (static::checkSlugExists($slug, $updateId, $locale)) {
+        while (static::checkSlugExists($slug, $locale, $updateId)) {
             $slug = "{$originalSlug}-" . $count++;
         }
 
@@ -66,7 +66,7 @@ trait HasTranslatableSlug
      * @param $slug
      * @param $updateId
      */
-    private static function checkSlugExists($slug, $updateId = null, $locale)
+    private static function checkSlugExists($slug, $locale, $updateId = null)
     {
         return static::whereRaw("JSON_EXTRACT(slug, '$." . $locale . "') = '{$slug}'")
             ->when($updateId, function ($query) use ($updateId) {

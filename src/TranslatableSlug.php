@@ -18,7 +18,7 @@ class TranslatableSlug extends Field
     /**
      * The field the slug should be generated from.
      *
-     * @param string $from
+     * @param  string  $from
      * @return string
      */
     public $from;
@@ -42,7 +42,6 @@ class TranslatableSlug extends Field
      *
      * @param  string  $name
      * @param  string|callable|null  $attribute
-     * @param  callable|null  $resolveCallback
      * @return void
      */
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
@@ -53,7 +52,7 @@ class TranslatableSlug extends Field
     /**
      * The field the slug should be generated from.
      *
-     * @param string $from
+     * @param  string  $from
      * @return $this
      */
     public function from($from)
@@ -66,7 +65,7 @@ class TranslatableSlug extends Field
     /**
      * Set the separator used for slugifying the field.
      *
-     * @param string $separator
+     * @param  string  $separator
      * @return $this
      */
     public function separator($separator)
@@ -78,8 +77,6 @@ class TranslatableSlug extends Field
 
     /**
      * Prepare the element for JSON serialization.
-     *
-     * @return array
      */
     public function jsonSerialize(): array
     {

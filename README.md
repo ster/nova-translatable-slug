@@ -3,6 +3,11 @@
 </br>
 </br>
 
+# Updated version for Laravel Nova 4
+Original code from: https://github.com/ahmetbedir/nova-translatable-slug
+
+All credits to https://github.com/ahmetbedir
+
 # Install
 ```sh
 composer require ahmetbedir/nova-translatable-slug

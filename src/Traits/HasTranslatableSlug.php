@@ -2,8 +2,8 @@
 
 namespace Ster\NovaTranslatableSlug\Traits;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 trait HasTranslatableSlug
 {
@@ -14,7 +14,7 @@ trait HasTranslatableSlug
     {
         $translatableLocales = array_keys(config('nova-translatable.locales'));
 
-        if (!$translatableLocales || !in_array(app()->getLocale(), $translatableLocales)) {
+        if (! $translatableLocales || ! in_array(app()->getLocale(), $translatableLocales)) {
             return;
         }
 
@@ -32,8 +32,6 @@ trait HasTranslatableSlug
     }
 
     /**
-     * @param $value
-     * @param $updateId
      * @return mixed
      */
     private static function getUniqueSlug($value, $locale, $updateId = null)
@@ -47,10 +45,6 @@ trait HasTranslatableSlug
         return $slug;
     }
 
-    /**
-     * @param $slug
-     * @param $updateId
-     */
     private static function makeUniqueSlug($slug, $locale, $updateId = null)
     {
         $originalSlug = $slug;
@@ -63,10 +57,6 @@ trait HasTranslatableSlug
         return $slug;
     }
 
-    /**
-     * @param $slug
-     * @param $updateId
-     */
     private static function checkSlugExists($slug, $locale, $updateId = null)
     {
         return static::whereRaw("JSON_EXTRACT(slug, '$." . $locale . "') = '{$slug}'")
@@ -76,11 +66,6 @@ trait HasTranslatableSlug
             ->exists();
     }
 
-    /**
-     * @param $query
-     * @param $slug
-     * @param $locale
-     */
     public function scopeWhereTranslatableSlug(Builder $query, string $slug, ?string $locale = null): Builder
     {
         $locale = $locale ?: app()->getLocale();
@@ -88,19 +73,11 @@ trait HasTranslatableSlug
         return $query->whereRaw("JSON_EXTRACT(slug, '$." . $locale . "') = '{$slug}'");
     }
 
-    /**
-     * @param string $slug
-     * @param array $columns
-     */
     public static function findBySlug(string $slug, ?string $locale = null, array $columns = ['*'])
     {
         return static::whereTranslatableSlug($slug, $locale)->first($columns);
     }
 
-    /**
-     * @param string $slug
-     * @param array $columns
-     */
     public static function findBySlugOrFail(string $slug, ?string $locale = null, array $columns = ['*'])
     {
         return static::whereTranslatableSlug($slug, $locale)->firstOrFail($columns);

@@ -1,5 +1,6 @@
 <?php
-namespace Ahmetbedir\NovaTranslatableSlug;
+
+namespace Ster\NovaTranslatableSlug;
 
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Field;
@@ -80,7 +81,7 @@ class TranslatableSlug extends Field
      *
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $request = app(NovaRequest::class);
 

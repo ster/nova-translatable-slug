@@ -1,5 +1,6 @@
 <?php
-namespace Ahmetbedir\NovaTranslatableSlug\Traits;
+
+namespace Ster\NovaTranslatableSlug\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;

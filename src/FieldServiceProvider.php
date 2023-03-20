@@ -1,9 +1,10 @@
 <?php
-namespace Ahmetbedir\NovaTranslatableSlug;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
+namespace Ster\NovaTranslatableSlug;
+
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Events\ServingNova;
+use Laravel\Nova\Nova;
 
 class FieldServiceProvider extends ServiceProvider
 {

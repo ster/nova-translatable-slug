@@ -1,9 +1,9 @@
-import IndexField from './components/IndexField';
-import FormField from './components/FormField';
-import DetailField from './components/DetailField';
+import IndexField from './components/IndexField'
+import DetailField from './components/DetailField'
+import FormField from './components/FormField'
 
-Nova.booting((Vue, router, store) => {
-  Vue.component('index-translatable-slug', IndexField);
-  Vue.component('form-translatable-slug', FormField);
-  Vue.component('detail-translatable-slug', DetailField);
-});
+Nova.booting((app, store) => {
+  app.component('index-translatable-slug', IndexField)
+  app.component('detail-translatable-slug', DetailField)
+  app.component('form-translatable-slug', FormField)
+})
